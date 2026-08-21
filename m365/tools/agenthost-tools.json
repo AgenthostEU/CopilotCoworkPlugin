@@ -1,0 +1,270 @@
+{
+  "tools": [
+    {
+      "name": "whoami",
+      "description": "Return the identity of the signed-in agenthost account you are acting as. Use to confirm authentication before other calls.",
+      "inputSchema": { "type": "object", "properties": {}, "required": [] }
+    },
+    {
+      "name": "list_projects",
+      "description": "List the agenthost projects the account can access. Every app lives inside a project.",
+      "inputSchema": { "type": "object", "properties": {}, "required": [] }
+    },
+    {
+      "name": "create_project",
+      "description": "Create a new agenthost project to hold apps. Start here before creating an app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Human-readable project name." }
+        },
+        "required": ["name"]
+      }
+    },
+    {
+      "name": "get_project",
+      "description": "Get details of a single agenthost project by id or slug.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Project id or slug." }
+        },
+        "required": ["project"]
+      }
+    },
+    {
+      "name": "create_app",
+      "description": "Create a new app or site inside a project, then deploy code to it. Use when the user wants to publish a site, API, or service.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Project id or slug to create the app in." },
+          "name": { "type": "string", "description": "App name." },
+          "runtime": { "type": "string", "description": "Runtime for the app, e.g. 'node', 'python', or 'static'." }
+        },
+        "required": ["project", "name"]
+      }
+    },
+    {
+      "name": "deploy_from_repo",
+      "description": "Build and deploy an app directly from a connected GitHub repository in one step.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Project id or slug to deploy into." },
+          "repo": { "type": "string", "description": "GitHub repository in 'owner/name' form." },
+          "branch": { "type": "string", "description": "Branch to deploy. Defaults to the repository's default branch." }
+        },
+        "required": ["project", "repo"]
+      }
+    },
+    {
+      "name": "list_apps",
+      "description": "List the apps in a project, or across all projects the account can access.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Optional project id or slug to filter by." }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "get_app",
+      "description": "Get details of a single app: its runtime, URL, current deploy, and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "get_app_logs",
+      "description": "Read recent build and runtime logs for an app. Use to diagnose a failed deploy or a crashing app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "limit": { "type": "integer", "description": "Maximum number of log lines to return." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "list_deploys",
+      "description": "List the deploy history for an app, newest first. Use before rolling back.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "deploy_app",
+      "description": "Deploy previously uploaded source to an app. Pair with begin_upload for upload-based deploys.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug to deploy." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "rollback_app",
+      "description": "Restore an app to a previous deploy. Use to recover from a bad release.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "deploy": { "type": "string", "description": "Deploy id to roll back to. Defaults to the previous deploy." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "delete_app",
+      "description": "Permanently delete an app and stop serving it. This cannot be undone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug to delete." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "create_database",
+      "description": "Create a managed database that apps can attach to.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Project id or slug to create the database in." },
+          "name": { "type": "string", "description": "Database name." },
+          "engine": { "type": "string", "description": "Database engine, e.g. 'postgres'." }
+        },
+        "required": ["project", "name"]
+      }
+    },
+    {
+      "name": "attach_database",
+      "description": "Attach a database to an app, exposing its connection details to the app as environment variables.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "database": { "type": "string", "description": "Database id or name to attach." }
+        },
+        "required": ["app", "database"]
+      }
+    },
+    {
+      "name": "list_databases",
+      "description": "List managed databases in a project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": { "type": "string", "description": "Optional project id or slug to filter by." }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "add_domain",
+      "description": "Add a custom domain to an app. Follow with verify_domain to complete DNS setup.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "domain": { "type": "string", "description": "Fully-qualified domain name, e.g. 'www.example.com'." }
+        },
+        "required": ["app", "domain"]
+      }
+    },
+    {
+      "name": "verify_domain",
+      "description": "Verify DNS for a custom domain and issue its certificate.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "domain": { "type": "string", "description": "The domain to verify." }
+        },
+        "required": ["app", "domain"]
+      }
+    },
+    {
+      "name": "list_domains",
+      "description": "List the custom domains attached to an app and their verification status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "manage_env",
+      "description": "Set, update, or remove environment variables for an app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "set": { "type": "object", "description": "Map of environment variable names to values to set." },
+          "unset": { "type": "array", "items": { "type": "string" }, "description": "Environment variable names to remove." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "get_env",
+      "description": "Read the environment variables configured for an app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." }
+        },
+        "required": ["app"]
+      }
+    },
+    {
+      "name": "share_app",
+      "description": "Invite a person by email to access a private app. Only invited addresses can open it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": { "type": "string", "description": "App id or slug." },
+          "email": { "type": "string", "description": "Email address to invite." }
+        },
+        "required": ["app", "email"]
+      }
+    },
+    {
+      "name": "create_token",
+      "description": "Mint a long-lived API token for an unattended client that cannot open a browser. Send it as a Bearer header.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "A label for the token." }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "contact_support",
+      "description": "Write a message to an agenthost human for billing, account trouble, or an issue you cannot resolve. Returns a reference.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string", "description": "What you need help with." }
+        },
+        "required": ["message"]
+      }
+    }
+  ]
+}

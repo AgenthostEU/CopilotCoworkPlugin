@@ -1,0 +1,18 @@
+{
+  "name": "agenthost-plugin-marketplace",
+  "owner": {
+    "name": "agenthost",
+    "url": "https://agenthost.eu"
+  },
+  "metadata": {
+    "description": "Official agenthost plugin marketplace"
+  },
+  "plugins": [
+    {
+      "name": "agenthost",
+      "description": "One-click agenthost MCP connector and deploy skill for Claude Code, Cursor, and Microsoft 365 Copilot Cowork.",
+      "source": "./",
+      "homepage": "https://agenthost.eu"
+    }
+  ]
+}

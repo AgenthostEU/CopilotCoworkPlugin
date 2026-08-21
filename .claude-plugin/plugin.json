@@ -1,0 +1,21 @@
+{
+  "name": "agenthost",
+  "version": "0.1.0",
+  "description": "Deploy and manage sites, apps, databases and domains on agenthost — agent-first web hosting. One-click MCP connector for Microsoft 365 Copilot Cowork, Claude Code, and Cursor.",
+  "author": {
+    "name": "agenthost",
+    "url": "https://agenthost.eu"
+  },
+  "homepage": "https://agenthost.eu",
+  "repository": "https://github.com/agenthosteu/CopilotCoworkPlugin",
+  "license": "MIT",
+  "keywords": [
+    "agenthost",
+    "hosting",
+    "deploy",
+    "paas",
+    "mcp",
+    "copilot",
+    "cowork"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agenthost": {
+      "type": "http",
+      "url": "https://agenthost.eu/mcp"
+    }
+  }
+}

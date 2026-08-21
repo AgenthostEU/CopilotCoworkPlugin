@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.28",
+  "version": "1.0.0",
+  "id": "28d55a8d-5fee-45a3-b3cc-373d70189c33",
+  "developer": {
+    "name": "agenthost",
+    "websiteUrl": "https://agenthost.eu",
+    "privacyUrl": "https://agenthost.eu/privacy",
+    "termsOfUseUrl": "https://agenthost.eu/terms"
+  },
+  "name": {
+    "short": "agenthost",
+    "full": "agenthost for Copilot Cowork"
+  },
+  "description": {
+    "short": "Deploy and manage sites, apps, databases and domains on agenthost.",
+    "full": "Agent-first web hosting inside Microsoft 365 Copilot Cowork. Create projects, deploy apps from a GitHub repo or an upload, attach databases, manage custom domains and environment variables, read deploy logs, and roll back — all through the agenthost MCP connector. Sign in once in the browser; there is no API key to paste."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#2B579A",
+  "agentConnectors": [
+    {
+      "id": "agenthost-mcp",
+      "displayName": "agenthost",
+      "description": "Deploy and manage apps, databases and domains on agenthost.",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://agenthost.eu/mcp",
+          "mcpToolDescription": {
+            "file": "tools/agenthost-tools.json"
+          }
+        }
+      }
+    }
+  ],
+  "agentSkills": [
+    { "folder": "./skills/deploy-on-agenthost" }
+  ]
+}
