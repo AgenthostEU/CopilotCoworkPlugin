@@ -1,0 +1,17 @@
+<!--
+  The sign: the wordmark's "a" and "h" on the site's own background, which is
+  what the logo reduces to at the size a tab strip gives it.
+
+  This file is the master. `favicon.ico` (16/32/48, for browsers that ask for
+  /favicon.ico rather than read this) and `apple-icon.png` (180, square-cornered
+  because iOS applies its own mask) are rendered from it, so a change here means
+  re-rendering those two.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-label="agenthost">
+  <title>agenthost</title>
+  <rect width="1000" height="1000" rx="200" fill="#0a0b0e"/>
+  <g transform="translate(144.204 704.179) scale(0.617165)">
+    <path fill="#ece9e1" d="M239.00 10.00Q155.00 10.00 106.50 -37.50Q58.00 -85.00 58.00 -162.00Q58.00 -242.00 113.00 -289.50Q168.00 -337.00 264.00 -337.00H398.00V-376.00Q398.00 -459.00 301.00 -459.00Q257.00 -459.00 231.00 -442.00Q205.00 -425.00 202.00 -394.00H82.00Q86.00 -468.00 144.50 -514.00Q203.00 -560.00 302.00 -560.00Q407.00 -560.00 465.00 -511.00Q523.00 -462.00 523.00 -373.00V0.00H401.00V-103.00Q394.00 -50.00 351.00 -20.00Q308.00 10.00 239.00 10.00ZM279.00 -92.00Q334.00 -92.00 366.00 -119.00Q398.00 -146.00 398.00 -191.00V-256.00H270.00Q229.00 -256.00 205.00 -233.00Q181.00 -210.00 181.00 -174.00Q181.00 -137.00 206.50 -114.50Q232.00 -92.00 279.00 -92.00Z"/>
+    <path fill="#c3f73a" transform="translate(-2280 0)" d="M2927.00 0.00V-730.00H3052.00V-550.00L3049.00 -448.00Q3059.00 -500.00 3098.00 -530.00Q3137.00 -560.00 3197.00 -560.00Q3278.00 -560.00 3326.50 -506.00Q3375.00 -452.00 3375.00 -361.00V0.00H3250.00V-346.00Q3250.00 -397.00 3223.50 -424.50Q3197.00 -452.00 3152.00 -452.00Q3105.00 -452.00 3078.50 -424.00Q3052.00 -396.00 3052.00 -344.00V0.00Z"/>
+  </g>
+</svg>

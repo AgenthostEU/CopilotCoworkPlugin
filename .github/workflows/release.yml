@@ -52,6 +52,10 @@ jobs:
             m365/build/agenthost-cowork.zip \
             --target "${GITHUB_SHA}" \
             --title "agenthost Cowork plugin ${{ steps.tag.outputs.value }}" \
-            --notes "Microsoft 365 Copilot Cowork plugin package.
+            --notes "Microsoft 365 Copilot Cowork plugin package. Download \`agenthost-cowork.zip\` below.
 
-          Install: Microsoft 365 admin center → **Manage apps** → **Upload custom app** → upload \`agenthost-cowork.zip\`. It then appears under **Cowork → Sources & Skills → Plugins → Discover**. Installing prompts the agenthost browser sign-in (OAuth)."
+          **Add it yourself (per user):** in Copilot Cowork open **Customize → Plugins**, choose the upload option, and select \`agenthost-cowork.zip\`. (Your tenant admin must allow custom/uploaded plugins.)
+
+          **Tenant-wide (admin):** Microsoft 365 admin center → **Manage apps** → **Upload custom app** → upload \`agenthost-cowork.zip\`. It then appears for everyone under **Cowork → Customize → Plugins → Discover**.
+
+          Either way, installing prompts the agenthost browser sign-in (OAuth) the first time."

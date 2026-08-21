@@ -1,0 +1,12 @@
+{
+  "name": "agenthost-cowork-plugin",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Tooling for the agenthost Microsoft 365 Copilot Cowork plugin package.",
+  "scripts": {
+    "icons": "node scripts/gen-icons.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}

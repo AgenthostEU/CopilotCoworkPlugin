@@ -27,14 +27,21 @@ This repo is a cross-platform Agent Skills plugin. The root is a Claude Code / C
 │       └── SKILL.md             # Agent Skill — works in Cowork AND Claude Code
 ├── m365/                        # Microsoft 365 Copilot Cowork package
 │   ├── manifest.json            # Unified app manifest v1.28
-│   ├── color.png                # 192x192 icon (placeholder — replace before store submit)
-│   ├── outline.png              # 32x32 icon (placeholder)
+│   ├── color.png                # 192x192 app icon (agenthost "ah" monogram)
+│   ├── outline.png              # 32x32 white-on-transparent silhouette
+│   ├── brand/
+│   │   └── agenthost-icon.svg   # Source mark the two PNGs are rendered from
 │   └── tools/
 │       └── agenthost-tools.json # mcpToolDescription — declares the connector's tools
 └── scripts/
-    ├── gen-icons.mjs            # Regenerate placeholder icons
+    ├── gen-icons.mjs            # Render color.png/outline.png from brand/agenthost-icon.svg (needs sharp)
     └── build-m365-package.sh    # Assemble the uploadable .zip
 ```
+
+The plugin's logo in Cowork is exactly these two icons. To change it, replace
+`m365/brand/agenthost-icon.svg` (or the PNGs directly), run `npm install && node
+scripts/gen-icons.mjs` to re-render, bump `version` in `m365/manifest.json`, rebuild, and
+re-upload/re-release so Cowork picks up the new icon on its next sync.
 
 The connector in `m365/manifest.json` intentionally omits the `authorization` block: because
 agenthost supports Dynamic Client Registration, Cowork creates the OAuth client on the plugin's
@@ -89,7 +96,12 @@ state.
 
 ## Install into Copilot Cowork
 
-**Test it for yourself (sideload):**
+**Add it yourself (per user):** download `agenthost-cowork.zip` from the
+[latest release](https://github.com/agenthosteu/CopilotCoworkPlugin/releases/latest) (or build
+it), then in Copilot Cowork open **Customize → Plugins**, choose the upload option, and select
+the `.zip`. Your tenant admin must allow custom/uploaded plugins for this to be available.
+
+**Test it for yourself (sideload via CLI):**
 
 ```bash
 npm install -g @microsoft/m365agentstoolkit-cli
@@ -97,9 +109,9 @@ atk auth login
 atk install --file-path ./m365/build/agenthost-cowork.zip --scope Personal
 ```
 
-**Publish to your tenant:** Microsoft 365 admin center → **Manage apps** → **Upload custom
-app** → upload the `.zip`. It then appears under **Cowork → Sources & Skills → Plugins →
-Discover**. Installing prompts the agenthost browser sign-in.
+**Publish to your tenant (admin):** Microsoft 365 admin center → **Manage apps** → **Upload
+custom app** → upload the `.zip`. It then appears for everyone under **Cowork → Customize →
+Plugins → Discover**. Installing prompts the agenthost browser sign-in.
 
 **Publish publicly:** submit via [Partner Center](https://partner.microsoft.com) to the
 Microsoft 365 App Store.

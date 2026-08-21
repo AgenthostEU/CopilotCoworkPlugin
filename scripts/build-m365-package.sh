@@ -15,9 +15,13 @@ zip_path="$out/agenthost-cowork.zip"
 rm -rf "$stage" "$zip_path"
 mkdir -p "$stage"
 
-# Regenerate icons if missing.
+# Icons are committed. Regenerate them with `node scripts/gen-icons.mjs` (needs
+# sharp) if they are ever missing — we do not auto-generate here so a release
+# never ships without the real brand icons.
 if [[ ! -f "$root/m365/color.png" || ! -f "$root/m365/outline.png" ]]; then
-  node "$root/scripts/gen-icons.mjs"
+  echo "error: m365/color.png or m365/outline.png missing." >&2
+  echo "       run: npm install && node scripts/gen-icons.mjs" >&2
+  exit 1
 fi
 
 cp "$root/m365/manifest.json" "$stage/"

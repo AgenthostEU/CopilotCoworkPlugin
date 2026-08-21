@@ -32,11 +32,13 @@ $zip  = Join-Path $out 'agenthost-cowork.zip'
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 if (Test-Path $zip) { Remove-Item -Force $zip }
 
-# Regenerate icons if missing.
+# Icons are committed. Regenerate them with `node scripts/gen-icons.mjs` (needs
+# sharp) if they are ever missing — we do not auto-generate here so a release
+# never ships without the real brand icons.
 $color   = Join-Path $root 'm365/color.png'
 $outline = Join-Path $root 'm365/outline.png'
 if (-not (Test-Path $color) -or -not (Test-Path $outline)) {
-  node (Join-Path $root 'scripts/gen-icons.mjs')
+  Write-Error "m365/color.png or m365/outline.png missing. Run: npm install && node scripts/gen-icons.mjs"
 }
 
 # Build the list of (source file, ZIP entry name) pairs. Entry names always use
