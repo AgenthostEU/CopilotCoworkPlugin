@@ -62,6 +62,10 @@ Both require Node.js (for icon generation); the bash version also needs `zip`. T
 `.zip` has `manifest.json`, both icons, `tools/`, and `skills/` at its root — the shape Cowork
 expects.
 
+A prebuilt, ready-to-upload package is checked in at
+[`m365/dist/agenthost-cowork.zip`](./m365/dist/agenthost-cowork.zip) if you'd rather not build
+it yourself.
+
 ### Alternative: generate the package with the Agents Toolkit
 
 If you prefer Microsoft's tooling, you can import the root plugin instead of hand-maintaining

@@ -2,6 +2,9 @@
 m365/build/
 *.zip
 
+# ...except the committed finished build
+!m365/dist/agenthost-cowork.zip
+
 # Node
 node_modules/
 
