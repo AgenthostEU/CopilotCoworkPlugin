@@ -4,6 +4,8 @@ Connect **Microsoft 365 Copilot Cowork** to [agenthost](https://agenthost.eu) â€
 hosting â€” so Copilot can create projects, deploy apps from a GitHub repo or an upload, attach
 databases, manage domains and environment variables, read deploy logs, and roll back.
 
+[![Get latest release](https://img.shields.io/badge/Get%20latest%20release-agenthost--cowork.zip-2B579A?style=for-the-badge&logo=github&logoColor=white)](https://github.com/agenthosteu/CopilotCoworkPlugin/releases/latest)
+
 The plugin adds two things to Cowork:
 
 - **A connector** to the agenthost remote MCP server at `https://agenthost.eu/mcp`.
