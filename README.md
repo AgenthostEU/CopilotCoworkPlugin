@@ -62,9 +62,11 @@ Both require Node.js (for icon generation); the bash version also needs `zip`. T
 `.zip` has `manifest.json`, both icons, `tools/`, and `skills/` at its root — the shape Cowork
 expects.
 
-A prebuilt, ready-to-upload package is checked in at
-[`m365/dist/agenthost-cowork.zip`](./m365/dist/agenthost-cowork.zip) if you'd rather not build
-it yourself.
+A prebuilt, ready-to-upload package is attached to every tagged
+[release](https://github.com/agenthosteu/CopilotCoworkPlugin/releases) as
+`agenthost-cowork.zip`, if you'd rather not build it yourself. Releases are produced
+automatically by [`.github/workflows/release.yml`](./.github/workflows/release.yml) when a
+`v*` tag is pushed.
 
 ### Alternative: generate the package with the Agents Toolkit
 

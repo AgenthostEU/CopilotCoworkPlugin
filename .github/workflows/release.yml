@@ -1,0 +1,44 @@
+name: Release Cowork package
+
+# Build the Microsoft 365 Copilot Cowork package and publish it as a GitHub
+# release asset whenever a version tag (v*) is pushed.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build package
+        run: bash scripts/build-m365-package.sh
+
+      - name: Verify archive paths are safe
+        run: |
+          python3 - <<'PY'
+          import zipfile, sys
+          z = zipfile.ZipFile("m365/build/agenthost-cowork.zip")
+          bad = [n for n in z.namelist()
+                 if n.startswith("/") or "\\" in n or ".." in n.split("/")
+                 or (len(n) > 1 and n[1] == ":")]
+          print("entries:", z.namelist())
+          if bad:
+              sys.exit(f"unsafe entries: {bad}")
+          PY
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            m365/build/agenthost-cowork.zip \
+            --title "agenthost Cowork plugin ${GITHUB_REF_NAME}" \
+            --notes "Microsoft 365 Copilot Cowork plugin package.
+
+          Install: Microsoft 365 admin center → **Manage apps** → **Upload custom app** → upload \`agenthost-cowork.zip\`. It then appears under **Cowork → Sources & Skills → Plugins → Discover**. Installing prompts the agenthost browser sign-in (OAuth)."
