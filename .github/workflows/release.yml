@@ -1,11 +1,19 @@
 name: Release Cowork package
 
 # Build the Microsoft 365 Copilot Cowork package and publish it as a GitHub
-# release asset whenever a version tag (v*) is pushed.
+# release asset. Triggers either on a pushed version tag (v*), or manually via
+# the Actions "Run workflow" button / API with a tag input — in the manual case
+# `gh release create` creates the tag on the checked-out commit automatically.
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to create (e.g. v0.1.0)"
+        required: true
+        default: "v0.1.0"
 
 permissions:
   contents: write
@@ -15,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Resolve tag
+        id: tag
+        run: echo "value=${{ github.event.inputs.tag || github.ref_name }}" >> "$GITHUB_OUTPUT"
 
       - name: Build package
         run: bash scripts/build-m365-package.sh
@@ -36,9 +48,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
+          gh release create "${{ steps.tag.outputs.value }}" \
             m365/build/agenthost-cowork.zip \
-            --title "agenthost Cowork plugin ${GITHUB_REF_NAME}" \
+            --target "${GITHUB_SHA}" \
+            --title "agenthost Cowork plugin ${{ steps.tag.outputs.value }}" \
             --notes "Microsoft 365 Copilot Cowork plugin package.
 
           Install: Microsoft 365 admin center → **Manage apps** → **Upload custom app** → upload \`agenthost-cowork.zip\`. It then appears under **Cowork → Sources & Skills → Plugins → Discover**. Installing prompts the agenthost browser sign-in (OAuth)."
