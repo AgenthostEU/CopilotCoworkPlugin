@@ -44,13 +44,23 @@ the manifest-time declaration.
 
 ## Build the Microsoft 365 package
 
+**Windows (PowerShell):**
+
+```powershell
+pwsh ./scripts/build-m365-package.ps1
+# -> m365/build/agenthost-cowork.zip
+```
+
+**macOS / Linux (bash):**
+
 ```bash
 scripts/build-m365-package.sh
 # -> m365/build/agenthost-cowork.zip
 ```
 
-Requires `zip` and Node.js (for icon generation). The resulting `.zip` has `manifest.json`, both
-icons, `tools/`, and `skills/` at its root — the shape Cowork expects.
+Both require Node.js (for icon generation); the bash version also needs `zip`. The resulting
+`.zip` has `manifest.json`, both icons, `tools/`, and `skills/` at its root — the shape Cowork
+expects.
 
 ### Alternative: generate the package with the Agents Toolkit
 
